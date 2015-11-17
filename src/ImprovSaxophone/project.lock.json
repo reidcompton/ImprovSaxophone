@@ -726,24 +726,6 @@
           "lib/dnx451/Microsoft.AspNet.Identity.EntityFramework.dll": {}
         }
       },
-      "Microsoft.AspNet.IISPlatformHandler/1.0.0-beta8": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.Http.Extensions": "1.0.0-beta8"
-        },
-        "frameworkAssemblies": [
-          "Microsoft.CSharp",
-          "mscorlib",
-          "System",
-          "System.Core"
-        ],
-        "compile": {
-          "lib/dnx451/Microsoft.AspNet.IISPlatformHandler.dll": {}
-        },
-        "runtime": {
-          "lib/dnx451/Microsoft.AspNet.IISPlatformHandler.dll": {}
-        }
-      },
       "Microsoft.AspNet.JsonPatch/1.0.0-beta8": {
         "type": "package",
         "dependencies": {
@@ -1862,7 +1844,7 @@
           "lib/dnx451/Microsoft.VisualStudio.Web.BrowserLink.Loader.dll": {}
         }
       },
-      "Newtonsoft.Json/6.0.6": {
+      "Newtonsoft.Json/7.0.1": {
         "type": "package",
         "compile": {
           "lib/net45/Newtonsoft.Json.dll": {}
@@ -2581,19 +2563,6 @@
         },
         "runtime": {
           "lib/dnxcore50/Microsoft.AspNet.Identity.EntityFramework.dll": {}
-        }
-      },
-      "Microsoft.AspNet.IISPlatformHandler/1.0.0-beta8": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.Http.Extensions": "1.0.0-beta8",
-          "System.Security.Principal.Windows": "4.0.0-beta-23409"
-        },
-        "compile": {
-          "lib/dnxcore50/Microsoft.AspNet.IISPlatformHandler.dll": {}
-        },
-        "runtime": {
-          "lib/dnxcore50/Microsoft.AspNet.IISPlatformHandler.dll": {}
         }
       },
       "Microsoft.AspNet.JsonPatch/1.0.0-beta8": {
@@ -3636,13 +3605,13 @@
           "lib/DNXCore50/Microsoft.Win32.Registry.dll": {}
         }
       },
-      "Newtonsoft.Json/6.0.6": {
+      "Newtonsoft.Json/7.0.1": {
         "type": "package",
         "compile": {
-          "lib/portable-net45+wp80+win8+wpa81+aspnetcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         },
         "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81+aspnetcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
       "Remotion.Linq/2.0.0-beta-002": {
@@ -5428,24 +5397,6 @@
           "lib/dnx451/Microsoft.AspNet.Identity.EntityFramework.dll": {}
         }
       },
-      "Microsoft.AspNet.IISPlatformHandler/1.0.0-beta8": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.Http.Extensions": "1.0.0-beta8"
-        },
-        "frameworkAssemblies": [
-          "Microsoft.CSharp",
-          "mscorlib",
-          "System",
-          "System.Core"
-        ],
-        "compile": {
-          "lib/dnx451/Microsoft.AspNet.IISPlatformHandler.dll": {}
-        },
-        "runtime": {
-          "lib/dnx451/Microsoft.AspNet.IISPlatformHandler.dll": {}
-        }
-      },
       "Microsoft.AspNet.JsonPatch/1.0.0-beta8": {
         "type": "package",
         "dependencies": {
@@ -6567,7 +6518,7 @@
           "lib/dnx451/Microsoft.VisualStudio.Web.BrowserLink.Loader.dll": {}
         }
       },
-      "Newtonsoft.Json/6.0.6": {
+      "Newtonsoft.Json/7.0.1": {
         "type": "package",
         "compile": {
           "lib/net45/Newtonsoft.Json.dll": {}
@@ -7402,24 +7353,6 @@
         },
         "runtime": {
           "lib/dnx451/Microsoft.AspNet.Identity.EntityFramework.dll": {}
-        }
-      },
-      "Microsoft.AspNet.IISPlatformHandler/1.0.0-beta8": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.Http.Extensions": "1.0.0-beta8"
-        },
-        "frameworkAssemblies": [
-          "Microsoft.CSharp",
-          "mscorlib",
-          "System",
-          "System.Core"
-        ],
-        "compile": {
-          "lib/dnx451/Microsoft.AspNet.IISPlatformHandler.dll": {}
-        },
-        "runtime": {
-          "lib/dnx451/Microsoft.AspNet.IISPlatformHandler.dll": {}
         }
       },
       "Microsoft.AspNet.JsonPatch/1.0.0-beta8": {
@@ -8543,7 +8476,7 @@
           "lib/dnx451/Microsoft.VisualStudio.Web.BrowserLink.Loader.dll": {}
         }
       },
-      "Newtonsoft.Json/6.0.6": {
+      "Newtonsoft.Json/7.0.1": {
         "type": "package",
         "compile": {
           "lib/net45/Newtonsoft.Json.dll": {}
@@ -9262,19 +9195,6 @@
         },
         "runtime": {
           "lib/dnxcore50/Microsoft.AspNet.Identity.EntityFramework.dll": {}
-        }
-      },
-      "Microsoft.AspNet.IISPlatformHandler/1.0.0-beta8": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.Http.Extensions": "1.0.0-beta8",
-          "System.Security.Principal.Windows": "4.0.0-beta-23409"
-        },
-        "compile": {
-          "lib/dnxcore50/Microsoft.AspNet.IISPlatformHandler.dll": {}
-        },
-        "runtime": {
-          "lib/dnxcore50/Microsoft.AspNet.IISPlatformHandler.dll": {}
         }
       },
       "Microsoft.AspNet.JsonPatch/1.0.0-beta8": {
@@ -10320,13 +10240,13 @@
           "lib/DNXCore50/Microsoft.Win32.Registry.dll": {}
         }
       },
-      "Newtonsoft.Json/6.0.6": {
+      "Newtonsoft.Json/7.0.1": {
         "type": "package",
         "compile": {
-          "lib/portable-net45+wp80+win8+wpa81+aspnetcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         },
         "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81+aspnetcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
       "Remotion.Linq/2.0.0-beta-002": {
@@ -12405,19 +12325,6 @@
           "lib/dnxcore50/Microsoft.AspNet.Identity.EntityFramework.dll": {}
         }
       },
-      "Microsoft.AspNet.IISPlatformHandler/1.0.0-beta8": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.AspNet.Http.Extensions": "1.0.0-beta8",
-          "System.Security.Principal.Windows": "4.0.0-beta-23409"
-        },
-        "compile": {
-          "lib/dnxcore50/Microsoft.AspNet.IISPlatformHandler.dll": {}
-        },
-        "runtime": {
-          "lib/dnxcore50/Microsoft.AspNet.IISPlatformHandler.dll": {}
-        }
-      },
       "Microsoft.AspNet.JsonPatch/1.0.0-beta8": {
         "type": "package",
         "dependencies": {
@@ -13461,13 +13368,13 @@
           "lib/DNXCore50/Microsoft.Win32.Registry.dll": {}
         }
       },
-      "Newtonsoft.Json/6.0.6": {
+      "Newtonsoft.Json/7.0.1": {
         "type": "package",
         "compile": {
-          "lib/portable-net45+wp80+win8+wpa81+aspnetcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         },
         "runtime": {
-          "lib/portable-net45+wp80+win8+wpa81+aspnetcore50/Newtonsoft.Json.dll": {}
+          "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll": {}
         }
       },
       "Remotion.Linq/2.0.0-beta-002": {
@@ -15468,19 +15375,6 @@
         "Microsoft.AspNet.Identity.EntityFramework.nuspec"
       ]
     },
-    "Microsoft.AspNet.IISPlatformHandler/1.0.0-beta8": {
-      "type": "package",
-      "sha512": "+PSE7BrucroIWZw8C1fQilmuo84ToZ//5Ek7AJ77JSL0SrCK+KrzrmcywDRBLruUuVZbkjHkFW3OA+VFwKOkuA==",
-      "files": [
-        "lib/dnx451/Microsoft.AspNet.IISPlatformHandler.dll",
-        "lib/dnx451/Microsoft.AspNet.IISPlatformHandler.xml",
-        "lib/dnxcore50/Microsoft.AspNet.IISPlatformHandler.dll",
-        "lib/dnxcore50/Microsoft.AspNet.IISPlatformHandler.xml",
-        "Microsoft.AspNet.IISPlatformHandler.1.0.0-beta8.nupkg",
-        "Microsoft.AspNet.IISPlatformHandler.1.0.0-beta8.nupkg.sha512",
-        "Microsoft.AspNet.IISPlatformHandler.nuspec"
-      ]
-    },
     "Microsoft.AspNet.JsonPatch/1.0.0-beta8": {
       "type": "package",
       "serviceable": true,
@@ -16502,9 +16396,9 @@
         "ref/net46/Microsoft.Win32.Registry.dll"
       ]
     },
-    "Newtonsoft.Json/6.0.6": {
+    "Newtonsoft.Json/7.0.1": {
       "type": "package",
-      "sha512": "w26uZNyCG5VeoKiEOJ4+9/o8koSofLKwHl7WLreIcp0U6r57L7WiRXmjp8MTKFw6dYNZ9AE0lw69WYbIhUsU9Q==",
+      "sha512": "q3V4KLetMLnt1gpAVWgtXnHjKs0UG/RalBc29u2ZKxd5t5Ze4JBL5WiiYIklJyK/5CRiIiNwigVQUo0FgbsuWA==",
       "files": [
         "lib/net20/Newtonsoft.Json.dll",
         "lib/net20/Newtonsoft.Json.xml",
@@ -16514,14 +16408,12 @@
         "lib/net40/Newtonsoft.Json.xml",
         "lib/net45/Newtonsoft.Json.dll",
         "lib/net45/Newtonsoft.Json.xml",
-        "lib/netcore45/Newtonsoft.Json.dll",
-        "lib/netcore45/Newtonsoft.Json.xml",
         "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.dll",
         "lib/portable-net40+sl5+wp80+win8+wpa81/Newtonsoft.Json.xml",
-        "lib/portable-net45+wp80+win8+wpa81+aspnetcore50/Newtonsoft.Json.dll",
-        "lib/portable-net45+wp80+win8+wpa81+aspnetcore50/Newtonsoft.Json.xml",
-        "Newtonsoft.Json.6.0.6.nupkg",
-        "Newtonsoft.Json.6.0.6.nupkg.sha512",
+        "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.dll",
+        "lib/portable-net45+wp80+win8+wpa81+dnxcore50/Newtonsoft.Json.xml",
+        "Newtonsoft.Json.7.0.1.nupkg",
+        "Newtonsoft.Json.7.0.1.nupkg.sha512",
         "Newtonsoft.Json.nuspec",
         "tools/install.ps1"
       ]
@@ -19685,7 +19577,6 @@
       "Microsoft.AspNet.Diagnostics >= 1.0.0-beta8",
       "Microsoft.AspNet.Diagnostics.Entity >= 7.0.0-beta8",
       "Microsoft.AspNet.Identity.EntityFramework >= 3.0.0-beta8",
-      "Microsoft.AspNet.IISPlatformHandler >= 1.0.0-beta8",
       "Microsoft.AspNet.Mvc >= 6.0.0-beta8",
       "Microsoft.AspNet.Mvc.TagHelpers >= 6.0.0-beta8",
       "Microsoft.AspNet.Server.Kestrel >= 1.0.0-beta8",
@@ -19697,7 +19588,8 @@
       "Microsoft.Framework.Logging >= 1.0.0-beta8",
       "Microsoft.Framework.Logging.Console >= 1.0.0-beta8",
       "Microsoft.Framework.Logging.Debug >= 1.0.0-beta8",
-      "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0-beta8"
+      "Microsoft.VisualStudio.Web.BrowserLink.Loader >= 14.0.0-beta8",
+      "Newtonsoft.Json >= 7.0.1"
     ],
     "DNX,Version=v4.5.1": [],
     "DNXCore,Version=v5.0": []

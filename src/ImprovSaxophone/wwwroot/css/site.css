@@ -32,3 +32,25 @@ textarea {
         z-index: 10 !important;
     }
 }
+
+/* circles */
+#noteHolderWrapper {
+    position:relative;
+}
+ul.noteHolder {
+    list-style:none;
+}
+
+ul.noteHolder li {
+    position:absolute;
+    left:50%
+}
+
+ul.noteHolder li span {
+    display:block;
+    border-radius: 100%;
+    border:2px solid #000;
+    transition: all 10s ease-in-out;
+    width: 50px;
+    height: 50px;
+}
