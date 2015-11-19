@@ -35,12 +35,12 @@ namespace ImprovSaxophone.Controllers
             return name;
         }
 
-        public List<T> LoadJson<T>(string path)
+        public T LoadJson<T>(string path)
         {
             using (StreamReader r = System.IO.File.OpenText(Path.Combine(_appEnvironment.ApplicationBasePath, path)))
             {
                 string json = r.ReadToEnd();
-                List<T> items = JsonConvert.DeserializeObject<List<T>>(json);
+                T items = JsonConvert.DeserializeObject<T>(json);
                 return items;
             }
         }
@@ -86,7 +86,7 @@ namespace ImprovSaxophone.Controllers
                             break;
                     }
                     break;
-                case "dominiant":
+                case "dominant":
                     switch (auxiliary)
                     {
                         case "7":
@@ -136,61 +136,73 @@ namespace ImprovSaxophone.Controllers
             return newNote;
         }
 
-        public Duration RandomDuration(Random r, int tsD, Duration lastDuration, double measureDuration, List<Duration> recursivelyExcludedDurations = null)
+        public Duration RandomDuration(Random r, int tsD, Duration lastDuration, double measureDuration, double measureLeft, List<Duration> recursivelyExcludedDurations = null)
         {
             List<Duration> excludedDurations = new List<Duration>();
             if (recursivelyExcludedDurations != null)
                 excludedDurations = recursivelyExcludedDurations;
             // todo add lastDuration and measureDuration to algorithm
             List<Duration> durations = new List<Duration>() {
-                new Duration() { stringDuration = string.Format("{0}_over_{1}", "1", (tsD*4).ToString()), doubleDuration = ((measureDuration)/(tsD*4)) },
-                new Duration() { stringDuration = string.Format("{0}_over_{1}", "1", (tsD*2).ToString()), doubleDuration = ((measureDuration)/(tsD*2)) },
-                new Duration() { stringDuration = string.Format("{0}_over_{1}", "1", (tsD*1).ToString()), doubleDuration = ((measureDuration)/(tsD*0.5)) },
-                new Duration() { stringDuration = string.Format("{0}_over_{1}", "1", (tsD*0.375).ToString()), doubleDuration = ((measureDuration)/(tsD*.375)) },
-                new Duration() { stringDuration = string.Format("{0}_over_{1}", "1", (tsD*0.25).ToString()), doubleDuration = ((measureDuration)/(tsD*0.25)) },
+                new Duration() { stringDuration = string.Format("n_{0}_over_{1}", "1", (tsD*4).ToString()), doubleDuration = ((measureDuration)/(tsD*4)) },
+                new Duration() { stringDuration = string.Format("n_{0}_over_{1}", "1", (tsD*2).ToString()), doubleDuration = ((measureDuration)/(tsD*2)) },
+                new Duration() { stringDuration = string.Format("n_{0}_over_{1}", "1", (tsD*1).ToString()), doubleDuration = ((measureDuration)/(tsD*1)) }
             };
-            Duration duration = durations.Where(x => !excludedDurations.Contains(x)).ElementAt(r.Next(0, durations.Count()));
-            if (duration.doubleDuration < measureDuration)
+            IEnumerable<Duration> durationList = durations.Where(x => excludedDurations.Find(y => y.doubleDuration == x.doubleDuration) == null);
+            Duration duration = durationList.ElementAt(r.Next(0, durationList.Count()));
+            if (duration.doubleDuration > measureLeft)
             {
                 //if (recursivelyExcludedDurations == null)
                 //    recursivelyExcludedDurations = durationsHolder;
                 excludedDurations.Add(duration);
-                RandomDuration(r, tsD, lastDuration, measureDuration, excludedDurations);
+                RandomDuration(r, tsD, lastDuration, measureDuration, measureLeft, excludedDurations);
             }
             return duration;
         }
 
-        public JsonResult Measure(DateTime start, int bpm, int tsN, int tsD, double measureFraction = 1.0, string root = "c", string quality = "major", string auxiliary = "")
+        public JsonResult GetNotes(DateTime start, string songName)
+        {
+            Measure m = new Measure() { Start = start };
+            List<Note> notes = new List<Note>();
+            Song song = LoadJson<Song>(string.Format("{0}{1}{2}", "wwwroot/Assets/json/", songName, ".json"));
+            foreach (Chord measure in song.measures)
+            {
+                List<Note> note = Measure(start, song.bpm, song.tsN, song.tsD, measure.Duration, measure.Root, measure.Quality, measure.Auxiliary);
+                foreach (Note n in note)
+                {
+                    notes.Add(n);
+                }
+            }
+            m.Notes = notes.ToArray();
+            return Json(m);
+        }
+
+        public List<Note> Measure(DateTime start, int bpm, int tsN, int tsD, double measureFraction = 1.0, string root = "c", string quality = "major", string auxiliary = "")
         {
             double measureDuration = ((480 / bpm) * 1000) * measureFraction;
+            double measureDurationLeft = measureDuration;
             Random r1 = new Random();
             int numberOfNotes = r1.Next(1, tsN * 3);
-
-            Measure measure = new Measure()
-            {
-                Start = start
-            };
             
             List<Note> notes = new List<Note>();
-            List<Key> keys = LoadJson<Key>("wwwroot/Assets/json/keys.json");
+            List<Key> keys = LoadJson<List<Key>>("wwwroot/Assets/json/keys.json");
             Key chromatic = keys.Where(x => x.key == "chromatic").FirstOrDefault();
             Key key = keys.Where(x => x.key == root).FirstOrDefault();
             string modeName = ModePicker(quality, auxiliary);
-            Mode mode = LoadJson<Mode>("wwwroot/Assets/json/modes.json").Where(x => x.mode == modeName).FirstOrDefault();
+            Mode mode = LoadJson<List<Mode>>("wwwroot/Assets/json/modes.json").Where(x => x.mode == modeName).FirstOrDefault();
             Key transformedKey = TransformKey(chromatic, key, mode);
-            while (measureDuration > 0)
+            while (measureDurationLeft > 0)
             {
                 Duration lastNote = notes.Count() > 0 ? notes.Last().Duration : null;
-                Duration duration = RandomDuration(r1, tsD, lastNote, measureDuration);
+                Duration duration = RandomDuration(r1, tsD, lastNote, measureDuration, measureDurationLeft);
                 notes.Add(new Note
                 {
                     Duration = duration,
                     Value = RandomNote(r1, transformedKey)
                 });
-                measureDuration = measureDuration - duration.doubleDuration;
+                measureDurationLeft = measureDurationLeft - duration.doubleDuration;
             }
-            measure.Notes = notes.ToArray();
-            return Json(measure);
+
+            return notes;
         }
 
         public IActionResult About()

@@ -34,23 +34,59 @@ textarea {
 }
 
 /* circles */
-#noteHolderWrapper {
+.noteHolder {
+    position:absolute;
+    left:50%;
+    top:50%;
+}
+
+.noteHolder.inactive {
+    display:none;
+}
+
+.noteHolder.active {
+    display:block;
+}
+
+.noteHolder.used { }
+
+.noteHolder .note {
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    background:rgba(72, 0, 200, 0.7);
+    border:2px solid #000;
     position:relative;
 }
-ul.noteHolder {
-    list-style:none;
-}
 
-ul.noteHolder li {
-    position:absolute;
-    left:50%
-}
-
-ul.noteHolder li span {
+.noteHolder .note span {
     display:block;
-    border-radius: 100%;
-    border:2px solid #000;
-    transition: all 10s ease-in-out;
-    width: 50px;
-    height: 50px;
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    background:#000;
+    position:absolute;
+    left:41%;
+    top:41%
+}
+
+.noteHolder .note.n_1_over_16:before {
+    display:block;
+    width:2px;
+    height:10px;
+    background:#000;
+}
+
+.noteHolder .note.n_1_over_8:before {
+    display:block;
+    width:2px;
+    height:10px;
+    background:#f00;
+}
+
+.noteHolder .note.n_1_over_4:before {
+    display:block;
+    width:2px;
+    height:10px;
+    background:#ff0;
 }

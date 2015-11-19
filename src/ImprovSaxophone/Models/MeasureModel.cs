@@ -5,6 +5,23 @@ using System.Threading.Tasks;
 
 namespace ImprovSaxophone.Models
 {
+    public class Song
+    {
+        public int bpm { get; set; }
+        public int tsN { get; set; }
+        public int tsD { get; set; }
+        public double intro { get; set; }
+        public Chord[] measures { get; set; }
+    }
+
+    public class Chord
+    {
+        public string Root { get; set; }
+        public string Quality { get; set; }
+        public string Auxiliary { get; set; }
+        public double Duration { get; set; }
+    }
+
     public class Measure
     {
         public DateTime Start { get; set; }

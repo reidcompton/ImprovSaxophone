@@ -2,11 +2,11 @@
     ViewData["Title"] = "Home Page";
     var name = ViewBag.Name;
 }
-@*<div>
-        <audio ng-repeat="note in notes" ng-src="{{ '/Assets/chrom_sax/' + note.Value + '.mp3' }}"></audio>
-</div>*@
-<div id="noteHolderWrapper">
-    <ul class="noteHolder"></ul>
+<div id="notesWrapper">
+    <div class="noteHolder inactive" ng-repeat="note in notes">
+        <audio class="noteQueue"  ng-src="{{ '/Assets/chrom_sax/' + note.note + '.mp3' }}" data-ng-duration="{{note.duration.doubleDuration}}"></audio>
+        <p class="note" ng-class="{{note.duration.stringDuration}}"><span></span></p>
+    </div>
 </div>
-<audio id="masterSong" src="~/Assets/a_train.m4a"></audio>
+<audio id="masterSong" src="~/Assets/songs/a_train.m4a"></audio>
 @*<audio autoplay="autoplay" controls src="~/Assets/chrom_sax/@(ViewBag.Name).mp3"></audio>*@
