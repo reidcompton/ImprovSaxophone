@@ -10,7 +10,7 @@ measure.controller('MeasureCtrl', function ($scope, $http) {
     }).success(function (data) {
         $scope.notes = $scope.notes || [];
         for (note in data.Notes) {
-            $scope.notes.push({ note: data.Notes[note].Value, duration: data.Notes[note].Duration });
+            $scope.notes.push({ note: data.Notes[note].Value, duration: data.Notes[note].Duration, soloNote : 'note_' + data.Notes[note].SoloValue });
         }
         console.log($scope.notes);
         if (isInit) initPlay('noteHolder');
@@ -25,14 +25,14 @@ function initPlay(notes) {
     function play(audio, prevAudio, callback) {
         if (prevAudio != null)
             prevAudio.removeClass('active').addClass('used').children('audio').trigger('pause').siblings('p').stop();
-        console.log(prevAudio);
+        //console.log(prevAudio);
         
-        console.log(audio);
+        console.log(audio.children('audio').attr('src'));
         audio.removeClass('inactive').addClass('active').children('audio').trigger('play');
         audio.animate({ 'left': '-=2000px' }, 6000, 'linear');
 
 
-        audio.children('p').css('background-color', 'rgba(' + Math.floor(Math.random() * 255) + ',' + Math.floor(Math.random() * 255) + ',' + Math.floor(Math.random() * 255) + ', 0.5)')
+        audio.children('p').css('background-color', 'rgba(' + Math.floor(Math.random() * 255) + ',' + Math.floor(Math.random() * 255) + ',' + Math.floor(Math.random() * 255) + ', 0.3)')
             .animate({
             borderTopLeftRadius: '50%',
             borderTopRightRadius: '50%',
@@ -40,7 +40,7 @@ function initPlay(notes) {
             borderBottomRightRadius: '50%',
             height: 3000,
             width: 3000,
-            top: -1200,
+            top: -1455,
             left:-1200
         }, 5000, 'linear');
         

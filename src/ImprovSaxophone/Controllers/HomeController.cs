@@ -8,6 +8,7 @@ using System.IO;
 using Newtonsoft.Json;
 using System.Text;
 using Microsoft.Dnx.Runtime;
+using ImprovSaxophone.Services;
 
 namespace ImprovSaxophone.Controllers
 {
@@ -20,21 +21,6 @@ namespace ImprovSaxophone.Controllers
             _appEnvironment = appEnvironment;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        public string RandomNote(Random r1, Key transformedKey)
-        {
-            string[] notes = transformedKey.notes;
-            string[] octaves = { "2", "3"};
-            int randNote = r1.Next(notes.Count());
-            int randOctave = r1.Next(octaves.Count());
-            string name = string.Format("{0}_{1}", notes[randNote], octaves[randOctave]);
-            return name;
-        }
-
         public T LoadJson<T>(string path)
         {
             using (StreamReader r = System.IO.File.OpenText(Path.Combine(_appEnvironment.ApplicationBasePath, path)))
@@ -44,6 +30,39 @@ namespace ImprovSaxophone.Controllers
                 return items;
             }
         }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public string RandomNote(Random r1, Key transformedKey, List<string> prefNotes, Note lastNote = null)
+        {
+            string lastNoteValue = ""; string lastNoteOctave = ""; int lastNoteIndex = 1;
+            if(lastNote != null)
+            {
+                lastNoteValue = lastNote.Value.Split('_')[0];
+                lastNoteOctave = lastNote.Value.Split('_')[1];
+                lastNoteIndex = Array.IndexOf(transformedKey.notes, lastNoteValue);
+                //if (lastNoteIndex > 0)
+                //    prefNotes.Add((lastNoteIndex + (r1.Next(-1, 1))).ToString());
+            }
+
+            string octave = !string.IsNullOrEmpty(lastNoteOctave) ?
+                                ((lastNoteIndex >= 5 && lastNoteOctave != "3") ? (Int32.Parse(lastNoteOctave) + r1.Next(2)).ToString() :
+                                ((lastNoteIndex < 2 && lastNoteOctave != "2") ? (Int32.Parse(lastNoteOctave) + r1.Next(-1, 2)).ToString() : lastNoteOctave)) :
+                                "2";
+
+
+
+            int randNote = Int32.Parse(prefNotes[r1.Next(prefNotes.Count())]);
+            if (randNote >= transformedKey.notes.Count())
+                randNote = transformedKey.notes.Count() - 1;
+            string name = string.Format("{0}_{1}", transformedKey.notes[randNote], octave);
+            return name;
+        }
+
+        
 
         public string ModePicker(string quality, string auxiliary)
         {
@@ -60,7 +79,7 @@ namespace ImprovSaxophone.Controllers
                             mode = modes[r.Next(0, modes.Length)];
                             break;
                         case "6":
-                            modes = new string[] { "ionian", "major pentatonic", "minor pentatonic" };
+                            modes = new string[] { "ionian", "major pentatonic" };
                             mode = modes[r.Next(0, modes.Length)];
                             break;
                         case "7":
@@ -143,7 +162,12 @@ namespace ImprovSaxophone.Controllers
                 excludedDurations = recursivelyExcludedDurations;
             // todo add lastDuration and measureDuration to algorithm
             List<Duration> durations = new List<Duration>() {
+                new Duration() { stringDuration = string.Format("n_{0}_over_{1}", "1", (tsD*8).ToString()), doubleDuration = ((measureDuration)/(tsD*8)) },
                 new Duration() { stringDuration = string.Format("n_{0}_over_{1}", "1", (tsD*4).ToString()), doubleDuration = ((measureDuration)/(tsD*4)) },
+                new Duration() { stringDuration = string.Format("n_{0}_over_{1}", "1", (tsD*4).ToString()), doubleDuration = ((measureDuration)/(tsD*4)) },
+                new Duration() { stringDuration = string.Format("n_{0}_over_{1}", "1", (tsD*4).ToString()), doubleDuration = ((measureDuration)/(tsD*4)) },
+                new Duration() { stringDuration = string.Format("n_{0}_over_{1}", "1", (tsD*2).ToString()), doubleDuration = ((measureDuration)/(tsD*2)) },
+                new Duration() { stringDuration = string.Format("n_{0}_over_{1}", "1", (tsD*2).ToString()), doubleDuration = ((measureDuration)/(tsD*2)) },
                 new Duration() { stringDuration = string.Format("n_{0}_over_{1}", "1", (tsD*2).ToString()), doubleDuration = ((measureDuration)/(tsD*2)) },
                 new Duration() { stringDuration = string.Format("n_{0}_over_{1}", "1", (tsD*1).ToString()), doubleDuration = ((measureDuration)/(tsD*1)) }
             };
@@ -164,9 +188,10 @@ namespace ImprovSaxophone.Controllers
             Measure m = new Measure() { Start = start };
             List<Note> notes = new List<Note>();
             Song song = LoadJson<Song>(string.Format("{0}{1}{2}", "wwwroot/Assets/json/", songName, ".json"));
+            Random r1 = new Random();
             foreach (Chord measure in song.measures)
             {
-                List<Note> note = Measure(start, song.bpm, song.tsN, song.tsD, measure.Duration, measure.Root, measure.Quality, measure.Auxiliary);
+                List<Note> note = Measure(start, song.bpm, song.tsN, song.tsD, r1, measure.Duration, measure.Root, measure.Quality, measure.Auxiliary);
                 foreach (Note n in note)
                 {
                     notes.Add(n);
@@ -176,15 +201,19 @@ namespace ImprovSaxophone.Controllers
             return Json(m);
         }
 
-        public List<Note> Measure(DateTime start, int bpm, int tsN, int tsD, double measureFraction = 1.0, string root = "c", string quality = "major", string auxiliary = "")
+        public List<Note> Measure(DateTime start, int bpm, int tsN, int tsD, Random r1, double measureFraction = 1.0, string root = "c", string quality = "major", string auxiliary = "")
         {
             double measureDuration = ((480 / bpm) * 1000) * measureFraction;
             double measureDurationLeft = measureDuration;
-            Random r1 = new Random();
             int numberOfNotes = r1.Next(1, tsN * 3);
-            
+
             List<Note> notes = new List<Note>();
             List<Key> keys = LoadJson<List<Key>>("wwwroot/Assets/json/keys.json");
+            int auxMod;
+            if (Int32.TryParse(auxiliary, out auxMod))
+                auxMod = Int32.Parse(auxiliary);
+
+            List<string> prefNotes = new List<string>() { "0", "2", "4", (auxMod - 1).ToString() };
             Key chromatic = keys.Where(x => x.key == "chromatic").FirstOrDefault();
             Key key = keys.Where(x => x.key == root).FirstOrDefault();
             string modeName = ModePicker(quality, auxiliary);
@@ -197,31 +226,12 @@ namespace ImprovSaxophone.Controllers
                 notes.Add(new Note
                 {
                     Duration = duration,
-                    Value = RandomNote(r1, transformedKey)
+                    Value = RandomNote(r1, transformedKey, prefNotes, notes.Count() > 0 ? notes.Last() : null)
                 });
                 measureDurationLeft = measureDurationLeft - duration.doubleDuration;
             }
 
             return notes;
-        }
-
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Error()
-        {
-            return View("~/Views/Shared/Error.cshtml");
         }
     }
 }

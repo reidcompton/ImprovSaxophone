@@ -31,6 +31,13 @@ namespace ImprovSaxophone.Models
     public class Note
     {
         public string Value { get; set; }
+        public string SoloValue
+        {
+            get
+            {
+                return this.Value.Split('_')[0];
+            }
+        }
         public Duration Duration { get; set; }
 
     }

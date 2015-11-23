@@ -2,10 +2,21 @@
     ViewData["Title"] = "Home Page";
     var name = ViewBag.Name;
 }
-<div id="notesWrapper">
-    <div class="noteHolder inactive" ng-repeat="note in notes">
-        <audio class="noteQueue"  ng-src="{{ '/Assets/chrom_sax/' + note.note + '.mp3' }}" data-ng-duration="{{note.duration.doubleDuration}}"></audio>
-        <p class="note" ng-class="{{note.duration.stringDuration}}"><span></span></p>
+<div class="songWrapper">
+    <div class="staff">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <div id="notesWrapper">
+        <div class="noteHolder inactive" ng-repeat="note in notes">
+            <audio class="noteQueue" ng-src="{{ '/Assets/chrom_sax/' + note.note + '.mp3' }}" data-ng-duration="{{note.duration.doubleDuration}}"></audio>
+            <p class="note {{'note_' + note.note}} {{note.duration.stringDuration}}">
+                <span>&#9834;</span>
+            </p>
+        </div>
     </div>
 </div>
 <audio id="masterSong" src="~/Assets/songs/a_train.m4a"></audio>
