@@ -10,7 +10,7 @@ measure.controller('MeasureCtrl', function ($scope, $http) {
     }).success(function (data) {
         $scope.notes = $scope.notes || [];
         for (note in data.Notes) {
-            $scope.notes.push({ note: data.Notes[note].Value, duration: data.Notes[note].Duration, soloNote : 'note_' + data.Notes[note].SoloValue });
+            $scope.notes.push({ note: data.Notes[note].Value, duration: data.Notes[note].Duration, soloNote : 'note_' + data.Notes[note].SoloValue, soloOctave: parseInt(data.Notes[note].SoloOctave) });
         }
         console.log($scope.notes);
         if (isInit) initPlay('noteHolder');

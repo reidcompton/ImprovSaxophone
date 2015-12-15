@@ -38,6 +38,13 @@ namespace ImprovSaxophone.Models
                 return this.Value.Split('_')[0];
             }
         }
+        public string SoloOctave
+        {
+            get
+            {
+                return this.Value.Split('_')[1];
+            }
+        }
         public Duration Duration { get; set; }
 
     }

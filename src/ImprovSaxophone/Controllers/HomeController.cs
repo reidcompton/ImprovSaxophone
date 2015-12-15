@@ -38,24 +38,27 @@ namespace ImprovSaxophone.Controllers
 
         public string RandomNote(Random r1, Key transformedKey, List<string> prefNotes, Note lastNote = null)
         {
+            List<string> localPrefNotes = new List<string>(prefNotes);
             string lastNoteValue = ""; string lastNoteOctave = ""; int lastNoteIndex = 1;
             if(lastNote != null)
             {
                 lastNoteValue = lastNote.Value.Split('_')[0];
                 lastNoteOctave = lastNote.Value.Split('_')[1];
                 lastNoteIndex = Array.IndexOf(transformedKey.notes, lastNoteValue);
-                //if (lastNoteIndex > 0)
-                //    prefNotes.Add((lastNoteIndex + (r1.Next(-1, 1))).ToString());
+                if (lastNoteIndex > 0)
+                    localPrefNotes.Add((lastNoteIndex + (r1.Next(-1, 1))).ToString());
             }
 
+            if (lastNoteOctave == "4")
+                Console.WriteLine("hi");
             string octave = !string.IsNullOrEmpty(lastNoteOctave) ?
-                                ((lastNoteIndex >= 5 && lastNoteOctave != "3") ? (Int32.Parse(lastNoteOctave) + r1.Next(2)).ToString() :
-                                ((lastNoteIndex < 2 && lastNoteOctave != "2") ? (Int32.Parse(lastNoteOctave) + r1.Next(-1, 2)).ToString() : lastNoteOctave)) :
+                                ((lastNoteIndex >= 5 && lastNoteOctave != "4") ? (Int32.Parse(lastNoteOctave) + r1.Next(2)).ToString() :
+                                ((lastNoteIndex < 2 && lastNoteOctave != "2") ? (Int32.Parse(lastNoteOctave) + r1.Next(-1, 1)).ToString() : lastNoteOctave)) :
                                 "2";
 
 
 
-            int randNote = Int32.Parse(prefNotes[r1.Next(prefNotes.Count())]);
+            int randNote = Int32.Parse(localPrefNotes[r1.Next(localPrefNotes.Count())]);
             if (randNote >= transformedKey.notes.Count())
                 randNote = transformedKey.notes.Count() - 1;
             string name = string.Format("{0}_{1}", transformedKey.notes[randNote], octave);

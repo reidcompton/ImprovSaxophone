@@ -11,9 +11,9 @@
         <div></div>
     </div>
     <div id="notesWrapper">
-        <div class="noteHolder inactive" ng-repeat="note in notes">
+        <div class="noteHolder inactive {{'note_' + note.note}}" ng-repeat="note in notes">
             <audio class="noteQueue" ng-src="{{ '/Assets/chrom_sax/' + note.note + '.mp3' }}" data-ng-duration="{{note.duration.doubleDuration}}"></audio>
-            <p class="note {{'note_' + note.note}} {{note.duration.stringDuration}}">
+            <p class="note {{note.duration.stringDuration}}" ng-class="{'strikethrough' : note.SoloOctave == 4}">
                 <span>&#9834;</span>
             </p>
         </div>
