@@ -40,7 +40,7 @@ namespace ImprovSax
                 app.UseHsts();
             }
             app.UseCors(builder =>
-                builder.WithOrigins("https://reidcompton.com/improvsax"));
+                builder.WithOrigins("https://projects.reidcompton.com/improvsax"));
 
             app.UseHttpsRedirection();
             app.UseMvc();
