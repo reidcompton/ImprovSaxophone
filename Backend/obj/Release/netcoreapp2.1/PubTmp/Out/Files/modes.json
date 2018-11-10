@@ -1,0 +1,188 @@
+﻿// rubric:
+// 0 = same
+// -1 = flat
+// -2 = double flat
+// 1 = sharp
+// -10 = drop note (pentatonic)
+[
+  {
+    "mode": "ionian",
+    "transforms": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "dorian",
+    "transforms": [
+      0,
+      0,
+      -1,
+      0,
+      0,
+      0,
+      -1
+    ]
+  },
+  {
+    "mode": "phygrian",
+    "transforms": [
+      0,
+      -1,
+      -1,
+      0,
+      0,
+      -1,
+      -1
+    ]
+  },
+  {
+    "mode": "lydian",
+    "transforms": [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "mixolydian",
+    "transforms": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      -1
+    ]
+  },
+  {
+    "mode": "aeolian",
+    "transforms": [
+      0,
+      0,
+      -1,
+      0,
+      0,
+      -1,
+      -1
+    ]
+  },
+  {
+    "mode": "locrian",
+    "transforms": [
+      0,
+      -1,
+      -1,
+      0,
+      -1,
+      -1,
+      -1
+    ]
+  },
+  {
+    "mode": "melodic minor",
+    "transforms": [
+      0,
+      0,
+      -1,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "mode": "harmonic minor",
+    "transforms": [
+      0,
+      0,
+      -1,
+      0,
+      0,
+      -1,
+      0
+    ]
+  },
+  {
+    "mode": "major pentatonic",
+    "transforms": [
+      0,
+      0,
+      0,
+      -10,
+      0,
+      0,
+      -10
+    ]
+  },
+  {
+    "mode": "minor pentatonic",
+    "transforms": [
+      0,
+      -10,
+      -1,
+      0,
+      0,
+      -10,
+      -1
+    ]
+  },
+  {
+    "mode": "blues",
+    "transforms": [
+      0,
+      -10,
+      -1,
+      1,
+      -1,
+      -2,
+      -1
+    ]
+  },
+  {
+    "mode": "whole-tone",
+    "transforms": [
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      -10
+    ]
+  },
+  {
+    "mode": "dom-dim",
+    "transforms": [
+      0,
+      -1,
+      -1,
+      -1,
+      -1,
+      0,
+      -1
+    ]
+  },
+  {
+    "mode": "diminished",
+    "transforms": [
+      0,
+      0,
+      -1,
+      0,
+      -1,
+      -1,
+      0
+    ]
+  }
+]
