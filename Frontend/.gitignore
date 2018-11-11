@@ -1,6 +1,8 @@
 .DS_Store
 node_modules
 dist
+/bin/
+/obj/
 
 # local env files
 .env.local

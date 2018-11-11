@@ -25,6 +25,11 @@ namespace ImprovSax
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options => 
+            {
+                options.AddPolicy("AllowMyOrigin",
+                    builder => builder.WithOrigins("https://improvsax.reidcompton.com"));
+            });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -39,8 +44,7 @@ namespace ImprovSax
             {
                 app.UseHsts();
             }
-            app.UseCors(builder =>
-                builder.WithOrigins("https://projects.reidcompton.com/improvsax"));
+            app.UseCors("AllowMyOrigin");
 
             app.UseHttpsRedirection();
             app.UseMvc();
