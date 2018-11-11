@@ -18,6 +18,9 @@
         </p>
       </div>
     </div>
+    <div class="start-btn">
+        <button v-on:click="play_all">Start</button>
+    </div>
   </div>
 </template>
 
@@ -33,7 +36,6 @@ export default {
         start: new Date(), 
         measureNotes: {}, 
         notes: [], 
-        isInit: true, 
         masterSong: null
       }
   },
@@ -145,15 +147,17 @@ export default {
             i++;
         }.bind(this));
     });
-    
-    if (this.isInit) this.isInit = false;
-    document.body.addEventListener('click', this.play_all, true);
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style scoped>
+.start-btn {
+    position:relative;
+    
+    top:100px;
+}
 .songWrapper,
 .staff {
     position: absolute;
