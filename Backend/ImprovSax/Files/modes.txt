@@ -1,0 +1,6 @@
+﻿ //rubric:
+ //0 = same
+ //-1 = flat
+ //-2 = double flat
+ //1 = sharp
+ //-10 = drop note (pentatonic)
